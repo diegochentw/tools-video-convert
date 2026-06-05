@@ -2,6 +2,16 @@
 
 本專案包含兩支獨立的影片工具腳本，可搭配使用，適合 NAS / 檔案伺服器場景。
 
+使用方式：修改 transcode_av1.py
+
+```bash
+    "SOURCE_DIR":   r"\\192.168.3.8\james", # 修改成來源目錄
+    "RECYCLE_DIR":  r"\\192.168.3.8\james\#recycle",  # 設定回收桶目錄
+
+```
+
+![使用範例](images/sample.png)
+
 ---
 
 ## transcode_av1.py
