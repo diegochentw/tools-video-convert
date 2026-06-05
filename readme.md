@@ -199,13 +199,4 @@ python filter_errors.py --reset --match "*2024*"
 
 ---
 
-## 提交前隱私檢查
 
-- `.gitignore` 至少應包含：`__pycache__/`、`.venv/`、`log.txt`、`transcode_state.json`
-- 提交前先看 `git diff --cached`，避免誤送出明文密鑰
-- 文件範例與程式預設路徑盡量使用相對路徑或程式目錄推導
-
-```bash
-git status --short
-git diff --cached
-```
