@@ -1,0 +1,18 @@
+stages:
+  - sync
+
+sync_to_github:
+  stage: sync
+  script:
+    - git checkout release
+    
+    # 1. 移除可能殘留的舊 github 節點，避免網址衝突
+    - git remote remove github || true
+    
+    # 2. 重新加入標準的 Token 驗證網址（使用你剛剛測試成功的新變數）
+    - git remote add github https://x-token-auth:$GITHUB_TOKEN_SYNC@github.com/diegochentw/tools-video-convert.git
+    
+    # 3. 強制推送到 GitHub 的 release 分支
+    - git push github release --force
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "release"'
