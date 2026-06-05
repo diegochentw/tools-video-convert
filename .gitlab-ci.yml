@@ -4,15 +4,14 @@ stages:
 sync_to_github:
   stage: sync
   script:
-    - git checkout release
+    # 1. 強制建立並切換到最新的 release 分支，直接對齊遠端的 origin/release
+    - git checkout -B release origin/release
     
-    # 1. 移除可能殘留的舊 github 節點，避免網址衝突
+    # 2. 清除舊的遠端關聯（避免報錯）並重新加入 GitHub 遠端庫
     - git remote remove github || true
+    - git remote add github https://x-token-auth:${GITHUB_TOKEN_SYNC}@github.com/diegochentw/tools-video-convert.git
     
-    # 2. 重新加入標準的 Token 驗證網址（使用你剛剛測試成功的新變數）
-    - git remote add github https://x-token-auth:$GITHUB_TOKEN_SYNC@github.com/diegochentw/tools-video-convert.git
-    
-    # 3. 強制推送到 GitHub 的 release 分支
+    # 3. 強制推送到 GitHub
     - git push github release --force
   rules:
     - if: '$CI_COMMIT_BRANCH == "release"'
